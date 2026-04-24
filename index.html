@@ -6,14 +6,14 @@
     <title>Absensi Karyawan Mahad Darul Abror</title>
     <meta name="theme-color" content="#020617">
     
-    <!-- PWA Support -->
+    <!-- PWA Support - Ikon Launcher Logo Sekolah -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Absensi DA">
     <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1KyFtChwYslz-KjbArLBgBFqClIkw5yg9">
     
-    <!-- Web Manifest (Simulated for Browser Recognition) -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJkZWZhdWx0X2xvY2FsZSI6ICJpZCIsCiAgIm5hbWUiOiAiQWJzZW5zaSBLYXJ5YXdhbiBNYWhhZCBEYXJ1bCBBYnJvciIsCiAgInNob3J0X25hbWUiOiAiQWJzZW5zaSBEQSIsCiAgInN0YXJ0X3VybCI6ICIuIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMDIwNjE3IiwKICAidGhlbWVfY29sb3IiOiAiIzAyMDYxNyIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9kLzFLeUZ0Q2h3WXNsei1LamJBckxCZ0JGcUNsSWt3NXlnOSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+    <!-- Web Manifest dengan Logo Sekolah untuk Launcher -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJkZWZhdWx0X2xvY2FsZSI6ICJpZCIsCiAgIm5hbWUiOiAiQWJzZW5zaSBLYXJ5YXdhbiBNYWhhZCBEYXJ1bCBBYnJvciIsCiAgInNob3J0X25hbWUiOiAiQWJzZW5zaSBEQSIsCiAgInN0YXJ0X3VybCI6ICIuIiwKICAmRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzAyMDYxNyIsCiAgInRoZW1lX2NvbG9yIjogIiMwMjA2MTciLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vZC8xS3lGdENod1lzbHotS2piQXJMQmdCRnFDbElrdzV5ZzkiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0KICBdCn0=">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
@@ -42,7 +42,7 @@
         <header class="flex justify-between items-center mb-10">
             <div class="flex items-center gap-4">
                 <div class="logo-box">
-                    <img src="https://lh3.googleusercontent.com/d/1KyFtChwYslz-KjbArLBgBFqClIkw5yg9" alt="Logo" class="w-full h-full object-contain">
+                    <img src="https://lh3.googleusercontent.com/d/1KyFtChwYslz-KjbArLBgBFqClIkw5yg9" alt="Logo Sekolah" class="w-full h-full object-contain">
                 </div>
                 <div>
                     <h1 class="text-xl font-black uppercase tracking-tighter text-white leading-tight">ABSENSI KARYAWAN <br><span class="text-neon text-lg tracking-normal">MAHAD DARUL ABROR</span></h1>
@@ -56,6 +56,7 @@
         </header>
 
         <main>
+            <!-- View Guru -->
             <section id="view-guru" class="max-w-2xl mx-auto w-full">
                 <div class="modern-glass p-8 md:p-12 rounded-[40px] text-center border-white/5 shadow-2xl relative overflow-hidden">
                     
@@ -70,7 +71,7 @@
                     <div id="landing-scan">
                         <button id="btn-start-scan" onclick="window.handleStartScan()" class="w-full max-w-xs bg-white text-slate-900 py-5 rounded-2xl font-black uppercase text-sm transition-all shadow-xl shadow-cyan-500/10 active:scale-95">Mulai Scan Sekarang</button>
                         <p class="text-[9px] text-slate-500 mt-4 font-bold uppercase tracking-widest px-4 italic text-center">Tekan tombol di atas untuk memindai QR Code</p>
-                        <p class="text-[8px] text-cyan-500/50 mt-8 font-medium uppercase tracking-[0.2em] animate-pulse">Tambahkan ke layar utama untuk akses instan</p>
+                        <p class="text-[8px] text-cyan-500/50 mt-8 font-medium uppercase tracking-[0.2em] animate-pulse italic">Klik titik tiga > Tambahkan ke Layar Utama</p>
                     </div>
 
                     <div id="camera-container" class="hidden mt-6">
@@ -83,29 +84,28 @@
                 </div>
             </section>
 
-            <!-- Bagian Admin (Sama seperti sebelumnya) -->
+            <!-- Bagian Admin -->
             <section id="view-admin" class="hidden space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
                     <div class="modern-glass p-6 rounded-3xl border-white/5">
-                        <p class="text-[9px] font-bold text-slate-500 uppercase">Karyawan Absen</p>
+                        <p class="text-[9px] font-bold text-slate-500 uppercase">Guru Aktif Hari Ini</p>
                         <h3 id="stat-guru" class="text-3xl font-black text-white">0</h3>
                     </div>
                     <div class="modern-glass p-6 rounded-3xl border-white/5">
-                        <p class="text-[9px] font-bold text-slate-500 uppercase">Total Log</p>
+                        <p class="text-[9px] font-bold text-slate-500 uppercase">Total Log Aktivitas</p>
                         <h3 id="stat-scan" class="text-3xl font-black text-cyan-400">0</h3>
                     </div>
-                    <div class="modern-glass p-6 rounded-3xl border-white/5">
-                        <p class="text-[9px] font-bold text-slate-500 uppercase">Terlambat (Ktr)</p>
-                        <h3 id="stat-late" class="text-3xl font-black text-red-500">0</h3>
-                    </div>
-                    <div class="modern-glass p-6 rounded-3xl border-white/5 flex flex-col justify-center">
-                        <button onclick="window.exportToExcel()" class="bg-cyan-500 text-slate-950 text-[10px] font-black uppercase py-3 rounded-xl mb-2">Export Excel</button>
-                        <button onclick="location.reload()" class="btn-utility text-slate-400 text-center">Keluar</button>
+                    <div class="modern-glass p-6 rounded-3xl border-white/5 flex flex-col justify-center col-span-1 md:col-span-2">
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="window.exportToExcel('harian')" class="bg-cyan-500 text-slate-950 text-[10px] font-black uppercase py-3 rounded-xl">Export Harian</button>
+                            <button onclick="window.exportToExcel('bulanan')" class="bg-white text-slate-950 text-[10px] font-black uppercase py-3 rounded-xl shadow-lg shadow-white/10">Rekap Bulanan</button>
+                        </div>
+                        <button onclick="location.reload()" class="btn-utility text-slate-400 text-center mt-3">Keluar Admin</button>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <input type="text" id="admin-search" placeholder="Cari Nama..." class="bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-sm text-white" oninput="window.renderAdminTable()">
+                    <input type="text" id="admin-search" placeholder="Cari Nama Guru..." class="bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-sm text-white" oninput="window.renderAdminTable()">
                     <input type="date" id="admin-date-filter" class="bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-sm text-white" onchange="window.renderAdminTable()">
                     <button onclick="window.clearHistory()" class="bg-red-500/10 text-red-500 border border-red-500/20 rounded-xl text-[10px] font-bold uppercase">Reset Database</button>
                 </div>
@@ -119,6 +119,7 @@
                                     <th class="p-5">Tanggal</th>
                                     <th class="p-5 text-center">Kantor In</th>
                                     <th class="p-5 text-center">Kantor Out</th>
+                                    <th class="p-5 text-center">Aula SMP</th>
                                     <th class="p-5">Log Mengajar / Aktivitas</th>
                                 </tr>
                             </thead>
@@ -130,7 +131,7 @@
         </main>
     </div>
 
-    <!-- Modal Success (Sama seperti sebelumnya) -->
+    <!-- Modal Success -->
     <div id="modal-success" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-950/98 backdrop-blur-md">
         <div class="modern-glass p-10 rounded-[40px] text-center max-w-sm w-full border border-cyan-500/30">
             <div class="w-20 h-20 bg-cyan-500 rounded-3xl flex items-center justify-center mx-auto mb-6 text-slate-900 shadow-2xl shadow-cyan-500/30">
@@ -192,10 +193,10 @@
                 if (user) {
                     const status = document.getElementById('connection-status');
                     if(status) {
-                        status.innerText = "Server Terhubung";
+                        status.innerText = "Server Aktif";
                         status.classList.replace('text-yellow-500', 'text-emerald-400');
                     }
-                    const q = query(collection(db, "absensi"), orderBy("timestamp", "desc"));
+                    const q = query(collection(db, "absensi"), orderBy("timestamp", "asc"));
                     onSnapshot(q, (snapshot) => {
                         allAbsensi = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                         if (isAdminActive) window.renderAdminTable();
@@ -224,10 +225,10 @@
                     await scanner.stop().catch(() => {});
                     window.processScan(txt);
                 }).catch(e => {
-                    alert("Kamera tidak ditemukan atau izin ditolak.");
+                    alert("Kamera tidak diizinkan.");
                     location.reload();
                 });
-            } catch (e) { console.error("Scanner Error:", e); }
+            } catch (e) { console.error(e); }
         };
 
         window.processScan = async (txt) => {
@@ -235,36 +236,43 @@
             const btnText = document.getElementById('btn-text');
             const btnLoader = document.getElementById('btn-loader');
             if(btnClose) btnClose.disabled = true;
-            if(btnText) btnText.innerText = "Menyimpan...";
+            if(btnText) btnText.innerText = "Saving...";
             if(btnLoader) btnLoader.classList.remove('hidden');
+            
             const now = new Date();
             const today = now.toLocaleDateString('id-ID');
             const name = (localStorage.getItem('user_full_name') || "KARYAWAN").toUpperCase();
             const rawQR = txt.toUpperCase().trim();
-            const isKantor = rawQR.includes("KANTOR");
+            
+            let jenis = "MENGAJAR";
+            if(rawQR.includes("KANTOR")) jenis = "KANTOR";
+            if(rawQR.includes("AULA SMP") || rawQR.includes("KAJIAN")) jenis = "KAJIAN";
+
             const locName = rawQR.replace("LOC:", "").trim();
             const jamMenit = now.toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}).replace('.', ':');
+
             let statusKtr = "";
-            if(isKantor) {
+            if(jenis === "KANTOR") {
                 const logsToday = allAbsensi.filter(a => a.nama === name && a.tanggal === today && a.jenis === "KANTOR");
                 statusKtr = logsToday.length > 0 ? "PULANG" : "MASUK";
             }
+
             try {
                 await addDoc(collection(db, "absensi"), {
-                    nama: name, lokasi: locName, jenis: isKantor ? "KANTOR" : "MENGAJAR",
+                    nama: name, lokasi: locName, jenis: jenis,
                     statusKantor: statusKtr, waktu: jamMenit, tanggal: today,
                     timestamp: now.getTime(), createdAt: serverTimestamp()
                 });
                 playBeep();
                 document.getElementById('modal-title').innerText = "ABSEN BERHASIL";
-                document.getElementById('res-status').innerText = isKantor ? `KANTOR (${statusKtr})` : "LOG AKTIVITAS";
-                document.getElementById('res-info').innerText = `${locName} - ${jamMenit}`;
+                document.getElementById('res-status').innerText = jenis === "KANTOR" ? `KANTOR (${statusKtr})` : (jenis === "KAJIAN" ? "KAJIAN" : "LOG AKTIVITAS");
+                document.getElementById('res-info').innerText = `${locName} @ ${jamMenit}`;
                 document.getElementById('modal-success').classList.remove('hidden');
                 if(btnClose) btnClose.disabled = false;
                 if(btnText) btnText.innerText = "Oke, Selesai";
                 if(btnLoader) btnLoader.classList.add('hidden');
             } catch (e) {
-                alert("Gagal mengirim data. Cek koneksi internet.");
+                alert("Koneksi Error.");
                 location.reload();
             }
         };
@@ -276,28 +284,32 @@
             const search = searchInput.value.toLowerCase();
             const dateFilter = dateInput.value;
             const formattedDate = dateFilter ? new Date(dateFilter).toLocaleDateString('id-ID') : "";
+            
             const groups = {};
-            let lateCount = 0;
-            allAbsensi.forEach(item => {
+            const sorted = [...allAbsensi].sort((a,b) => a.timestamp - b.timestamp);
+
+            sorted.forEach(item => {
                 if(search && !item.nama.toLowerCase().includes(search)) return;
                 if(formattedDate && item.tanggal !== formattedDate) return;
                 const key = `${item.nama}_${item.tanggal}`;
-                if(!groups[key]) groups[key] = { nama: item.nama, tgl: item.tanggal, in: "-", out: "-", logs: [], ts: item.timestamp };
+                if(!groups[key]) groups[key] = { nama: item.nama, tgl: item.tanggal, in: "-", out: "-", kajian: "-", logs: [], ts: item.timestamp };
+                
                 if(item.jenis === "KANTOR") {
-                    if(item.statusKantor === "MASUK") {
-                        groups[key].in = item.waktu;
-                        const [h, m] = (item.waktu || "00:00").split(':');
-                        if(parseInt(h) > 7 || (parseInt(h) === 7 && parseInt(m) > 15)) lateCount++;
-                    }
+                    if(item.statusKantor === "MASUK") groups[key].in = item.waktu;
                     if(item.statusKantor === "PULANG") groups[key].out = item.waktu;
-                } else { groups[key].logs.push(`${item.lokasi} (${item.waktu})`); }
+                } else if(item.jenis === "KAJIAN") {
+                    groups[key].kajian = item.waktu;
+                } else { 
+                    groups[key].logs.push(`${item.lokasi} (${item.waktu})`); 
+                }
             });
+
             const data = Object.values(groups).sort((a,b) => b.ts - a.ts);
             document.getElementById('stat-guru').innerText = new Set(data.map(i => i.nama)).size;
             document.getElementById('stat-scan').innerText = allAbsensi.length;
-            document.getElementById('stat-late').innerText = lateCount;
+            
             const tbody = document.getElementById('table-body');
-            tbody.innerHTML = data.length ? "" : `<tr><td colspan="5" class="p-10 text-center text-slate-500 italic">Data Tidak Ditemukan</td></tr>`;
+            tbody.innerHTML = data.length ? "" : `<tr><td colspan="6" class="p-10 text-center text-slate-500 italic">Data Kosong</td></tr>`;
             data.forEach(i => {
                 tbody.insertAdjacentHTML('beforeend', `
                     <tr class="hover:bg-white/5 transition-all">
@@ -305,66 +317,119 @@
                         <td class="p-5 text-slate-400 font-bold">${i.tgl}</td>
                         <td class="p-5 text-center text-emerald-400 font-black">${i.in}</td>
                         <td class="p-5 text-center text-orange-400 font-black">${i.out}</td>
+                        <td class="p-5 text-center text-cyan-400 font-black">${i.kajian}</td>
                         <td class="p-5">${i.logs.map(l => `<span class="class-badge">${l}</span>`).join("") || "-"}</td>
                     </tr>
                 `);
             });
         };
 
-        window.exportToExcel = () => {
-            const tbody = document.getElementById('table-body');
-            const data = [];
-            tbody.querySelectorAll('tr').forEach(tr => {
-                const tds = tr.querySelectorAll('td');
-                if(tds.length < 5) return;
-                data.push({
-                    "Nama Karyawan": tds[0].innerText, "Tanggal": tds[1].innerText,
-                    "Waktu Masuk": tds[2].innerText, "Waktu Pulang": tds[3].innerText,
-                    "Detail Log": tds[4].innerText
-                });
+        window.exportToExcel = (mode) => {
+            const dateInput = document.getElementById('admin-date-filter');
+            const searchInput = document.getElementById('admin-search');
+            const search = searchInput.value.toLowerCase();
+            const dateFilter = dateInput.value;
+            const formattedDate = dateFilter ? new Date(dateFilter).toLocaleDateString('id-ID') : "";
+
+            const groups = {};
+            const sorted = [...allAbsensi].sort((a,b) => a.timestamp - b.timestamp);
+
+            sorted.forEach(item => {
+                if(search && !item.nama.toLowerCase().includes(search)) return;
+                
+                // Jika mode harian, filter tanggal spesifik. Jika bulanan, filter bulan & tahun saja.
+                if(mode === 'harian' && formattedDate && item.tanggal !== formattedDate) return;
+                if(mode === 'bulanan' && dateFilter) {
+                    const itemParts = item.tanggal.split('/'); // dd/mm/yyyy
+                    const filterDate = new Date(dateFilter);
+                    const filterMonth = (filterDate.getMonth() + 1).toString().padStart(2, '0');
+                    const filterYear = filterDate.getFullYear().toString();
+                    if(itemParts[1] !== filterMonth || itemParts[2] !== filterYear) return;
+                }
+
+                const key = `${item.nama}_${item.tanggal}`;
+                if(!groups[key]) groups[key] = { nama: item.nama, tgl: item.tanggal, in: "-", out: "-", kajian: "-", logs: [], ts: item.timestamp };
+                
+                if(item.jenis === "KANTOR") {
+                    if(item.statusKantor === "MASUK") groups[key].in = item.waktu;
+                    if(item.statusKantor === "PULANG") groups[key].out = item.waktu;
+                } else if(item.jenis === "KAJIAN") {
+                    groups[key].kajian = item.waktu;
+                } else { 
+                    groups[key].logs.push(`${item.lokasi} (${item.waktu})`); 
+                }
             });
-            if(data.length === 0) return alert("Data kosong.");
-            const ws = XLSX.utils.json_to_sheet(data);
+
+            const rawData = Object.values(groups).sort((a,b) => a.ts - b.ts);
+            if(rawData.length === 0) return alert("Tidak ada data untuk diexport.");
+
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Rekap Absensi");
-            XLSX.writeFile(wb, `Absensi_Mahad_DA_${new Date().toISOString().split('T')[0]}.xlsx`);
+
+            // SHEET 1: DETAIL HARIAN
+            let maxLogs = 0;
+            rawData.forEach(i => { if(i.logs.length > maxLogs) maxLogs = i.logs.length; });
+            const detailExcel = rawData.map(i => {
+                const row = { "Nama Karyawan": i.nama, "Tanggal": i.tgl, "Kantor Masuk": i.in, "Kantor Pulang": i.out, "Aula SMP (Kajian)": i.kajian };
+                for(let j = 0; j < maxLogs; j++) row[`Jam-${j+1} / Aktivitas`] = i.logs[j] || "-";
+                return row;
+            });
+            const wsDetail = XLSX.utils.json_to_sheet(detailExcel);
+            XLSX.utils.book_append_sheet(wb, wsDetail, "Detail Harian");
+
+            // SHEET 2: SUMMARY REKAP TOTAL (KHUSUS BULANAN)
+            if(mode === 'bulanan') {
+                const summaryObj = {};
+                rawData.forEach(i => {
+                    if(!summaryObj[i.nama]) summaryObj[i.nama] = { Nama: i.nama, Total_Hadir: 0, Total_Kajian: 0, Total_Jam_Mengajar: 0 };
+                    if(i.in !== "-" || i.out !== "-") summaryObj[i.nama].Total_Hadir++;
+                    if(i.kajian !== "-") summaryObj[i.nama].Total_Kajian++;
+                    summaryObj[i.nama].Total_Jam_Mengajar += i.logs.length;
+                });
+                const summaryExcel = Object.values(summaryObj);
+                const wsSummary = XLSX.utils.json_to_sheet(summaryExcel);
+                XLSX.utils.book_append_sheet(wb, wsSummary, "Rekap Total Karyawan");
+            }
+
+            XLSX.writeFile(wb, `Rekap_Absensi_DA_${mode}_${new Date().toISOString().split('T')[0]}.xlsx`);
         };
 
         window.promptAdmin = () => {
-            const key = prompt("Masukan Kunci Admin:");
-            if(key === "Admin1234") {
+            const k = prompt("Kunci Admin:");
+            if(k === "Admin1234") {
                 isAdminActive = true;
                 document.getElementById('view-guru').classList.add('hidden');
                 document.getElementById('view-admin').classList.remove('hidden');
                 window.renderAdminTable();
-            } else if (key !== null) { alert("Kunci Salah!"); }
+            } else if(k !== null) alert("Salah!");
         };
 
         window.changeMyIdentity = () => {
-            const current = localStorage.getItem('user_full_name');
-            const n = prompt("Ganti Nama Anda:", current || "");
+            const curr = localStorage.getItem('user_full_name');
+            const n = prompt("Ganti Nama:", curr || "");
             if(n) { localStorage.setItem('user_full_name', n.trim()); location.reload(); }
         };
 
         window.clearHistory = async () => {
-            if(confirm("Hapus semua data permanen?")) {
-                const snap = await getDocs(collection(db, "absensi"));
-                for(const d of snap.docs) await deleteDoc(doc(db, "absensi", d.id));
+            if(confirm("Hapus semua data?")) {
+                const s = await getDocs(collection(db, "absensi"));
+                for(const d of s.docs) await deleteDoc(doc(db, "absensi", d.id));
                 location.reload();
             }
         };
 
         setInterval(() => {
             const d = new Date();
-            document.getElementById('live-clock').innerText = d.toLocaleTimeString('id-ID');
-            document.getElementById('live-date').innerText = d.toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'}).toUpperCase();
+            const c = document.getElementById('live-clock');
+            const t = document.getElementById('live-date');
+            if(c) c.innerText = d.toLocaleTimeString('id-ID');
+            if(t) t.innerText = d.toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'}).toUpperCase();
         }, 1000);
 
         window.addEventListener('DOMContentLoaded', () => {
-            const myName = localStorage.getItem('user_full_name');
-            if(myName) {
+            const n = localStorage.getItem('user_full_name');
+            if(n) {
                 document.getElementById('identity-section').classList.remove('hidden');
-                document.getElementById('display-name').innerText = myName.toUpperCase();
+                document.getElementById('display-name').innerText = n.toUpperCase();
                 document.getElementById('btn-change-identity').classList.remove('hidden');
             }
             startApp();
