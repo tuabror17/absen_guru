@@ -45,7 +45,7 @@
                     <img src="https://lh3.googleusercontent.com/d/1KyFtChwYslz-KjbArLBgBFqClIkw5yg9" alt="Logo Sekolah" class="w-full h-full object-contain">
                 </div>
                 <div>
-                    <h1 class="text-xl font-black uppercase tracking-tighter text-white leading-tight">ABSENSI KARYAWAN <br><span class="text-neon text-lg tracking-normal">MAHAD DARUL ABROR</span></h1>
+                    <h1 class="text-xl font-black uppercase tracking-tighter text-white leading-tight">SMART-G <br><span class="text-neon text-lg tracking-normal">System Monitoring & Attendance Real-time for Guru</span></h1>
                     <p id="connection-status" class="text-[8px] font-bold text-yellow-500 tracking-[0.3em] uppercase italic mt-1">Menghubungkan...</p>
                 </div>
             </div>
@@ -232,50 +232,67 @@
         };
 
         window.processScan = async (txt) => {
-            const btnClose = document.getElementById('btn-modal-close');
-            const btnText = document.getElementById('btn-text');
-            const btnLoader = document.getElementById('btn-loader');
-            if(btnClose) btnClose.disabled = true;
-            if(btnText) btnText.innerText = "Saving...";
-            if(btnLoader) btnLoader.classList.remove('hidden');
-            
-            const now = new Date();
-            const today = now.toLocaleDateString('id-ID');
-            const name = (localStorage.getItem('user_full_name') || "KARYAWAN").toUpperCase();
-            const rawQR = txt.toUpperCase().trim();
-            
-            let jenis = "MENGAJAR";
-            if(rawQR.includes("KANTOR")) jenis = "KANTOR";
-            if(rawQR.includes("AULA SMP") || rawQR.includes("KAJIAN")) jenis = "KAJIAN";
+    const btnClose = document.getElementById('btn-modal-close');
+    const btnText = document.getElementById('btn-text');
+    const btnLoader = document.getElementById('btn-loader');
+    
+    // --- FITUR JEDA 1 JAM ---
+    const lastScan = localStorage.getItem('last_scan_time');
+    const now = new Date();
+    const oneHour = 60 * 60 * 1000; // 1 jam dalam milidetik
 
-            const locName = rawQR.replace("LOC:", "").trim();
-            const jamMenit = now.toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}).replace('.', ':');
+    if (lastScan && (now.getTime() - lastScan < oneHour)) {
+        const remaining = Math.ceil((oneHour - (now.getTime() - lastScan)) / (60 * 1000));
+        alert("Sabar Akhi/Ukhti! Tunggu " + remaining + " menit lagi baru bisa scan lagi.");
+        location.reload();
+        return;
+    }
+    // ------------------------
 
-            let statusKtr = "";
-            if(jenis === "KANTOR") {
-                const logsToday = allAbsensi.filter(a => a.nama === name && a.tanggal === today && a.jenis === "KANTOR");
-                statusKtr = logsToday.length > 0 ? "PULANG" : "MASUK";
-            }
+    if(btnClose) btnClose.disabled = true;
+    if(btnText) btnText.innerText = "Saving...";
+    if(btnLoader) btnLoader.classList.remove('hidden');
+    
+    const today = now.toLocaleDateString('id-ID');
+    const name = (localStorage.getItem('user_full_name') || "KARYAWAN").toUpperCase();
+    const rawQR = txt.toUpperCase().trim();
+    
+    let jenis = "MENGAJAR";
+    if(rawQR.includes("KANTOR")) jenis = "KANTOR";
+    if(rawQR.includes("AULA SMP") || rawQR.includes("KAJIAN")) jenis = "KAJIAN";
 
-            try {
-                await addDoc(collection(db, "absensi"), {
-                    nama: name, lokasi: locName, jenis: jenis,
-                    statusKantor: statusKtr, waktu: jamMenit, tanggal: today,
-                    timestamp: now.getTime(), createdAt: serverTimestamp()
-                });
-                playBeep();
-                document.getElementById('modal-title').innerText = "ABSEN BERHASIL";
-                document.getElementById('res-status').innerText = jenis === "KANTOR" ? `KANTOR (${statusKtr})` : (jenis === "KAJIAN" ? "KAJIAN" : "LOG AKTIVITAS");
-                document.getElementById('res-info').innerText = `${locName} @ ${jamMenit}`;
-                document.getElementById('modal-success').classList.remove('hidden');
-                if(btnClose) btnClose.disabled = false;
-                if(btnText) btnText.innerText = "Oke, Selesai";
-                if(btnLoader) btnLoader.classList.add('hidden');
-            } catch (e) {
-                alert("Koneksi Error.");
-                location.reload();
-            }
-        };
+    const locName = rawQR.replace("LOC:", "").trim();
+    const jamMenit = now.toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}).replace('.', ':');
+
+    let statusKtr = "";
+    if(jenis === "KANTOR") {
+        const logsToday = allAbsensi.filter(a => a.nama === name && a.tanggal === today && a.jenis === "KANTOR");
+        statusKtr = logsToday.length > 0 ? "PULANG" : "MASUK";
+    }
+
+    try {
+        await addDoc(collection(db, "absensi"), {
+            nama: name, lokasi: locName, jenis: jenis,
+            statusKantor: statusKtr, waktu: jamMenit, tanggal: today,
+            timestamp: now.getTime(), createdAt: serverTimestamp()
+        });
+        
+        // SIMPAN WAKTU SCAN TERAKHIR KE HP
+        localStorage.setItem('last_scan_time', now.getTime());
+
+        playBeep();
+        document.getElementById('modal-title').innerText = "ABSEN BERHASIL";
+        document.getElementById('res-status').innerText = jenis === "KANTOR" ? `KANTOR (${statusKtr})` : (jenis === "KAJIAN" ? "KAJIAN" : "LOG AKTIVITAS");
+        document.getElementById('res-info').innerText = `${locName} @ ${jamMenit}`;
+        document.getElementById('modal-success').classList.remove('hidden');
+        if(btnClose) btnClose.disabled = false;
+        if(btnText) btnText.innerText = "Oke, Selesai";
+        if(btnLoader) btnLoader.classList.add('hidden');
+    } catch (e) {
+        alert("Koneksi Error.");
+        location.reload();
+    }
+};
 
         window.renderAdminTable = () => {
             const searchInput = document.getElementById('admin-search');
