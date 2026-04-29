@@ -231,23 +231,32 @@
             } catch (e) { console.error(e); }
         };
 
-        window.processScan = async (txt) => {
+       window.processScan = async (txt) => {
     const btnClose = document.getElementById('btn-modal-close');
     const btnText = document.getElementById('btn-text');
     const btnLoader = document.getElementById('btn-loader');
     
-    // --- FITUR JEDA 1 JAM ---
-    const lastScan = localStorage.getItem('last_scan_time');
     const now = new Date();
-    const oneHour = 60 * 60 * 1000; // 1 jam dalam milidetik
+    const rawQR = txt.toUpperCase().trim();
+    
+    // --- SETTING JEDA BERBEDA ---
+    const lastScan = localStorage.getItem('last_scan_time');
+    const isKantor = rawQR.includes("KANTOR");
+    
+    // Jeda: 1 jam (Kantor) vs 10 menit (Kelas/Lainnya)
+    const jedaMs = isKantor ? (60 * 60 * 1000) : (5 * 60 * 1000); 
+    const tipeJeda = isKantor ? "1 Jam (Absen Kantor)" : "5 Menit (Absen Kelas)";
 
-    if (lastScan && (now.getTime() - lastScan < oneHour)) {
-        const remaining = Math.ceil((oneHour - (now.getTime() - lastScan)) / (60 * 1000));
-        alert("Sabar Akhi/Ukhti! Tunggu " + remaining + " menit lagi baru bisa scan lagi.");
+    if (lastScan && (now.getTime() - lastScan < jedaMs)) {
+        const diff = jedaMs - (now.getTime() - lastScan);
+        const menit = Math.floor(diff / (60 * 1000));
+        const detik = Math.floor((diff % (60 * 1000)) / 1000);
+        
+        alert(`Sabar Ya! Khusus ${tipeJeda}, tunggu ${menit} menit ${detik} detik lagi.`);
         location.reload();
         return;
     }
-    // ------------------------
+    // ----------------------------
 
     if(btnClose) btnClose.disabled = true;
     if(btnText) btnText.innerText = "Saving...";
@@ -255,10 +264,9 @@
     
     const today = now.toLocaleDateString('id-ID');
     const name = (localStorage.getItem('user_full_name') || "KARYAWAN").toUpperCase();
-    const rawQR = txt.toUpperCase().trim();
     
     let jenis = "MENGAJAR";
-    if(rawQR.includes("KANTOR")) jenis = "KANTOR";
+    if(isKantor) jenis = "KANTOR";
     if(rawQR.includes("AULA SMP") || rawQR.includes("KAJIAN")) jenis = "KAJIAN";
 
     const locName = rawQR.replace("LOC:", "").trim();
@@ -277,7 +285,7 @@
             timestamp: now.getTime(), createdAt: serverTimestamp()
         });
         
-        // SIMPAN WAKTU SCAN TERAKHIR KE HP
+        // Simpan waktu scan terakhir
         localStorage.setItem('last_scan_time', now.getTime());
 
         playBeep();
