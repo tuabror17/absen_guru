@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -245,8 +245,8 @@
     const isKantor = rawQR.includes("KANTOR");
     
     // Jeda: 1 jam (Kantor) vs 10 menit (Kelas/Lainnya)
-    const jedaMs = isKantor ? (60 * 60 * 1000) : (5 * 60 * 1000); 
-    const tipeJeda = isKantor ? "1 Jam (Absen Kantor)" : "5 Menit (Absen Kelas)";
+    const jedaMs = isKantor ? (5 * 60 * 1000) : (5 * 60 * 1000); 
+    const tipeJeda = isKantor ? "5 Menit (Absen Kantor)" : "5 Menit (Absen Kelas)";
 
     if (lastScan && (now.getTime() - lastScan < jedaMs)) {
         const diff = jedaMs - (now.getTime() - lastScan);
